@@ -14,7 +14,7 @@ hier ein kurzes Code-Snippet:
 - hosts: localhost
   connection: local
   vars:
-    my_list: [ "Hello", "World", "this", "is", "just", "a", "list", "of", "strings ]
+    my_list: [ "Hello", "World", "this", "is", "just", "a", "list", "of", "strings" ]
   tasks:
     - name: build list with all items with an 'i' in it
       set_fact:
