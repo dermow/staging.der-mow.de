@@ -7,9 +7,9 @@ categories: Ansible
 
 Moin,
 
-nachdem ich in der Firma nun häufiger das Problem hatte, dass ich mir Ansible-Listen dynamisch erstellen und erweitern muss, 
+nachdem ich nun häufiger das Problem hatte, dass ich mir Ansible-Listen dynamisch erstellen und erweitern muss, 
 hier ein kurzes Code-Snippet:
-`
+
 ```yaml
 - hosts: all
   vars:
