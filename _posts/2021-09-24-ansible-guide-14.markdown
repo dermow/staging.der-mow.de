@@ -18,7 +18,7 @@ hier ein kurzes Code-Snippet:
     - name: build list with all items an 'i' in it
       set_fact:
         my_dynamic_list: "{{ my_dynamic_list|default([]) + [ item ] }}"
-      loop: "{{ my_list }}
+      loop: "{{ my_list }}"
       when: 'i' in my_list
       
     - name: print results
