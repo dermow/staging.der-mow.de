@@ -11,7 +11,8 @@ nachdem ich nun häufiger das Problem hatte, dass ich mir Ansible-Listen dynamis
 hier ein kurzes Code-Snippet:
 
 ```yaml
-- hosts: all
+- hosts: localhost
+  connection: local
   vars:
     my_list: [ "Hello", "World", "this", "is", "just", "a", "list", "of", "strings ]
   tasks:
