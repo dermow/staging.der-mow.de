@@ -61,6 +61,24 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 ```
 
 ## Kurze Erklärung
-Zunächst wurde eine List mit Beispielwerten "my_list" definiert. Im ersten Task wird dann durch alle Items aus "my_list" iteriert. Zusätzlich bekommt der Task eine Bedingung "'i' in item". Sprich, der task wird nur ausgeführt, wenn das jeweilige Item den Buchstaben "i" enthält. Sollte die Bedingung zutreffen, wird das Item der Ziel-Liste angefügt. Der Jinja2-Filter " | default([]), fängt im Prinzip den ersten Durchlauf ab, zu dem die Liste "my_dynamic_list" noch nicht existiert und liefert in diesem Fall eine leere Liste "[]" zurück. Da man an eine Liste nur eine weitere Liste - und keinen String - anfügen kann, definieren wir den String in einer Liste mit einem einzigen Item.
+Zunächst wurde eine List mit Beispielwerten "my_list" definiert. Im ersten Task wird dann durch alle Items aus "my_list" iteriert. Zusätzlich bekommt der Task die Bedingung 
 
+```yaml
+when: "'i' in item"
+```
 
+Sprich, der task wird nur ausgeführt, wenn das jeweilige Item den Buchstaben "i" enthält. Sollte die Bedingung zutreffen, wird das Item der Ziel-Liste angefügt. Der Jinja2-Filter 'default':
+
+```yaml
+my_dynamic_list: "{%raw%}{{ my_dynamic_list|default([]) + [ item ] }}{%endraw%}"
+```
+
+fängt im Prinzip den ersten Durchlauf ab, zu dem die Liste "my_dynamic_list" noch nicht existiert und liefert in diesem Fall eine leere Liste zurück. Da man an eine Liste nur eine weitere Liste - und keinen String - anfügen kann, definieren wir den String in einer Liste mit einem einzigen Item:
+
+```yaml
+ ... [ item ] ...
+````
+
+Vielleicht findet der ein oder Andere diesen Kleinen Codeschnipsel ja noch nützlich :)
+
+Grüße!
