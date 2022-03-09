@@ -19,7 +19,7 @@ hier ein kurzes Code-Snippet:
       set_fact:
         my_dynamic_list: "{%raw%}{{ my_dynamic_list|default([]) + [ item ] }}{%endraw%}"
       loop: "{%raw%}{{ my_list }}{%endraw%}"
-      when: "i' in my_list"
+      when: "'i' in my_list"
       
     - name: print results
       debug:
