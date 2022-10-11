@@ -13,6 +13,8 @@ Mit Hilfe von terraform können wir (Cloud-)Infrastrukturen mit Code (Infrastruc
 
 Bevor wir in den nächsten Artikeln weiter darauf eingehen, möchte ich kurz die wichtigsten Begrifflichkeiten erläutern.
 
+<!-- excerpt-end -->
+
 **State**: 
 Im Gegensatz zu z.B Ansible, welches ohne vorheriges Wissen auf die Infrastruktur losgeht, "merkt" sich Terraform den aktuellen Zusaten der selbst verwalteten Ressourcen in seinem State, der lokal auf der Festplatte, in einem S3-Bucket - oder auf vielen weiteren Providern gespeichert werden kann.
 
