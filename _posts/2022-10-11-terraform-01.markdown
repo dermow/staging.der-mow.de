@@ -19,7 +19,7 @@ Bevor wir in den nächsten Artikeln weiter darauf eingehen, möchte ich kurz die
 Im Gegensatz zu z.B Ansible, welches ohne vorheriges Wissen auf die Infrastruktur losgeht, "merkt" sich Terraform den aktuellen Zusaten der selbst verwalteten Ressourcen in seinem State, der lokal auf der Festplatte, in einem S3-Bucket - oder auf vielen weiteren Providern gespeichert werden kann.
 
 **Backend**:
-Die Terraform Backend-Konfiguration. Hauptsächlich die Konfiguration des States.
+Die Backend-Konfiguration bestimmt, wo Terraform seine State-Files ablegen soll.
 
 **Provider**:
 Ein Provider ist sozusagen ein "Plugin" mit dem Terraform in die Lage versetzt wird mit den verschiedenen Cloud APIs zu sprechen. Provider gibt es z.B für AWS, Microsoft Azure, Google Cloud Platform - aber auch für Klassische Umgebungen wie VMWare. Eine Liste aller integrierter Provider findet sich hier:
