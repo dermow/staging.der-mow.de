@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "Terraform 01 - Übersicht"
+date:   2022-10-11 07:50:42 +0100
+categories: Terraform
+---
+
+Moin Moin! Nach ziemlich langer Pause hab ich mich mal wieder dazu entschieden eine kleine Artikel-Reihe zu beginnen. Nachdem wir bereits einen Blick auf Ansible 
+geworfen haben, möchte ich als nächstes ein weiteres Tool aus meinem daily business beleuchten: Terrafrom. 
+
