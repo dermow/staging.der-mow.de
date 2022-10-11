@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "Terraform 01"
+date:   2022-10-11 10:00:42 +0100
+categories: Ansible
+---
+
+Moin,
+
+
