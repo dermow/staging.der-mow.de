@@ -93,8 +93,9 @@ terraform apply
 
 Wie leitet Terraform nun seine Aktionen ab? Im Grunde vergleicht Terraform immer den Code (Sollzustand) mit dem State (Ist-Zustand) und leitet aus der Differenz seine Aktionen ab. Existiert also eine Ressource im Code, aber nicht im State, so wird diese angelegt. Existiert dagegen eine Ressource im State aber nicht mehr im Code, so wird dieses gelöscht. Wichtig zu wissen ist, dass Terraform nur mit Ressourcen arbeitet, die auch mit Terrform angelegt wurden, es werden also keine Instanzen gelöscht, die Terraform nicht kennt.
 
+**Übersichtsgrafik:**
 
-![Terraform drawio](https://user-images.githubusercontent.com/68634232/195307435-57060ae8-f460-4eb8-bb85-a129ec105dd1.png)
+![Terraform drawio](https://user-images.githubusercontent.com/68634232/195308463-d3d56d76-98be-4504-a013-6010f947a3b8.png)
 
 
 Mehr zur Installation und Verwendung von Terraform dann im nächsten Teil :-)
