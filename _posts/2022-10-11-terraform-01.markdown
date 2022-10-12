@@ -9,30 +9,30 @@ Moin,
 
 Nach langer Pause möchte ich nun mal wieder eine kleine Artikel-Reihe starten, die sich um Terraform drehen soll. Zunächst mal kurz: was ist Terraform eigentlich?
 
-Mit Hilfe von terraform können wir (Cloud-)Infrastrukturen mit Code (Infrastructure as Code) beschreiben und diese erzeugen und verwalten. Terraform setzt dabei auf seine eigene Beschreibungssprache HCL (Hashicorp Configuration Language). Grob zusammengefasst beschreiben wir unsere Ziel-Umgebung mit HCL und terraform nutzt dann die verschiedensten Cloud-APIs um die Ressoucen zu erstellen bzw. zu verwalten.
+Mithilfe von Terraform können wir (Cloud)Infrastrukturen mit Code (Infrastructure as Code) beschreiben und diese erzeugen und verwalten. Terraform setzt dabei auf seine eigene Beschreibungssprache HCL (Hashicorp Configuration Language). Grob zusammengefasst beschreiben wir unsere Ziel-Umgebung mit HCL und Terraform nutzt dann die verschiedensten Cloud-APIs, um die Ressourcen zu erstellen bzw. zu verwalten.
 
 Bevor wir in den nächsten Artikeln weiter darauf eingehen, möchte ich kurz die wichtigsten Begrifflichkeiten erläutern.
 
 <!-- excerpt-end -->
 
 **State**: 
-Im Gegensatz zu z.B Ansible, welches ohne vorheriges Wissen auf die Infrastruktur losgeht, "merkt" sich Terraform den aktuellen Zustand der selbst verwalteten Ressourcen in seinem State, der lokal auf der Festplatte, in einem S3-Bucket - oder auf vielen weiteren Providern gespeichert werden kann.
+Im Gegensatz zu z.B. Ansible, welches ohne vorheriges Wissen auf die Infrastruktur losgeht, "merkt" sich Terraform den aktuellen Zustand der selbst verwalteten Ressourcen in seinem State, der lokal auf der Festplatte, in einem S3-Bucket - oder auf vielen weiteren Providern gespeichert werden kann.
 
 **Backend**:
 Die Backend-Konfiguration bestimmt, wo Terraform seine State-Files ablegen soll.
 
 **Provider**:
-Ein Provider ist sozusagen ein "Plugin" mit dem Terraform in die Lage versetzt wird mit den verschiedenen Cloud APIs zu sprechen. Provider gibt es z.B für AWS, Microsoft Azure, Google Cloud Platform - aber auch für Klassische Umgebungen wie VMWare. Eine Liste aller integrierter Provider findet sich hier:
+Ein Provider ist sozusagen ein "Plugin" mit dem Terraform in die Lage versetzt wird mit den verschiedenen Cloud APIs zu sprechen. Provider gibt es z.B. für AWS, Microsoft Azure, Google Cloud Platform - aber auch für klassische Umgebungen wie VMWare. Eine Liste aller integrierter Provider findet sich hier:
 https://registry.terraform.io/browse/providers
 
 **Ressource**:
 Eine Ressource ist ein Objekt, welches von Terraform verwaltet - bzw. erstellt werden soll. 
 
 **Datasource**:
-Eine Datasource ist eine bestehende Ressource, außerhalt des aktuellen Terraform-State - auf die wir dynamisch zugreifen möchten. Dies ist zum Beispiel hilfreich, wenn wir Subnet-IDs in einer Cloud benötigen, die Subnets aber nicht selbst anlegen. 
+Eine Datasource ist eine bestehende Ressource, außerhalb des aktuellen Terraform-State - auf die wir dynamisch zugreifen möchten. Dies ist zum Beispiel hilfreich, wenn wir Subnet-IDs in einer Cloud benötigen, die Subnets aber nicht selbst anlegen. 
 
 **Modul**:
-Ein Modul ist in Terraform eine zusammenhängende Einheit an HCL-Code. In einem Terrafrom-Projekt existiert immer das Root-Modul. wir können aber auch wiederverwendbare Module wie z.B. "aws-webserver" oder ähnliches erstellen und diese in beliebig vielen weiteren Projekten parametrisiert nutzen.
+Ein Modul ist in Terraform eine zusammenhängende Einheit an HCL-Code. In einem Terraform-Projek existiert immer das Root-Modul. Wir können aber auch wiederverwendbare Module wie z.B. "aws-webserver" oder ähnliches erstellen und diese in beliebig vielen weiteren Projekten parametrisiert nutzen.
 
 ### Kurzes Beispiel
 Hier ein kurzes Beispiel, um das Ganze in der Praxis zu zeigen:
@@ -74,7 +74,7 @@ resource "aws_instance" "my-instance" {
 }
 ```
 
-Somit haben wir ein kleines Terraform-Projekt angelegt. Um den Code umzusetzen müssen wir (vorausgesetzt terraform ist bereits installiert) noch folgende Befehle kennen:
+Somit haben wir ein kleines Terraform-Projekt angelegt. Um den Code umzusetzen, müssen wir (vorausgesetzt Terraform ist bereits installiert) noch folgende Befehle kennen:
 
 ```bash
 # Provider installieren & state file anlegen
