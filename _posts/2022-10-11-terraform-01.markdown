@@ -89,7 +89,7 @@ terraform plan
 terraform apply
 ```
 
-Mehr zur Verwendung von Terraform dann im nächsten Teil :-)
+Mehr zur Installation und Verwendung von Terraform dann im nächsten Teil :-)
 
 Viele Grüße und bis dann
 
