@@ -33,3 +33,64 @@ Eine Datasource ist eine bestehende Ressource, außerhalt des aktuellen Terrafor
 
 **Modul**:
 Ein Modul ist in Terraform eine zusammenhängende Einheit an HCL-Code. In einem Terrafrom-Projekt existiert immer das Root-Modul. wir können aber auch wiederverwendbare Module wie z.B. "aws-webserver" oder ähnliches erstellen und diese in beliebig vielen weiteren Projekten parametrisiert nutzen.
+
+### Kurzes Beispiel
+Hier ein kurzes Beispiel, um das Ganze in der Praxis zu zeigen:
+
+```HCL
+// Provider Konfiguration
+provider "aws" {
+  region = "eu-central-1"
+  access_key = "my-access-key"
+  secret_key = "my-secret-key"
+}
+
+
+// Mit der Datasource finden wir ein existierendes AMI
+data "aws_ami" "ubuntu-ami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+// Ressource: EC2-Instanz
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+```
+
+Somit haben wir ein kleines Terraform-Projekt angelegt. Um den Code umzusetzen müssen wir (vorausgesetzt terraform ist bereits installiert) noch folgende Befehle kennen:
+
+```bash
+# Provider installieren & state file anlegen
+terraform init
+```
+```bash
+# Testlauf durchführen 
+terraform plan
+```
+```bash
+# Änderungen übernehmen
+terraform apply
+```
+
+Mehr zur Verwendung von Terraform dann im nächsten Teil :-)
+
+Viele Grüße und bis dann
+
+Mow
