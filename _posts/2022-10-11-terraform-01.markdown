@@ -16,7 +16,7 @@ Bevor wir in den nächsten Artikeln weiter darauf eingehen, möchte ich kurz die
 <!-- excerpt-end -->
 
 **State**: 
-Im Gegensatz zu z.B Ansible, welches ohne vorheriges Wissen auf die Infrastruktur losgeht, "merkt" sich Terraform den aktuellen Zusaten der selbst verwalteten Ressourcen in seinem State, der lokal auf der Festplatte, in einem S3-Bucket - oder auf vielen weiteren Providern gespeichert werden kann.
+Im Gegensatz zu z.B Ansible, welches ohne vorheriges Wissen auf die Infrastruktur losgeht, "merkt" sich Terraform den aktuellen Zustand der selbst verwalteten Ressourcen in seinem State, der lokal auf der Festplatte, in einem S3-Bucket - oder auf vielen weiteren Providern gespeichert werden kann.
 
 **Backend**:
 Die Backend-Konfiguration bestimmt, wo Terraform seine State-Files ablegen soll.
