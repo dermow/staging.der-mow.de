@@ -282,7 +282,7 @@ aws_instance.my-instance: Still creating... [10s elapsed]
 aws_instance.my-instance: Creation complete after 12s [id=i-0fcef7f5c8d5e195d]
 ```
 
-Fertig! Die Instanz wurde erstellt und sollte nun in unserer AWS-Umgebung laufen :)
+Fertig! Die Instanz wurde erstellt und sollte nun in unserer AWS-Umgebung laufen :) Wir können "terraform plan" und apply auch ohne die Angabe eines Planfiles ausführen. Mit dem Plan file wird aber sichergestellt, dass exakt die Aktionen aus dem "terraform plan" auch ausgeführt werden.
 
 ### terraform show
 Mit terraform show können wir uns alle ressourcen und Datasources im State anzeigen lassen. 
