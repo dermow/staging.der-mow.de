@@ -1,0 +1,14 @@
+---
+layout: post
+title:  "Terraform #02 - Installation und die wichtigsten Commands"
+date:   2022-10-13 10:00:42 +0100
+categories: Terraform
+---
+
+Heyho,
+
+im zweiten Teil der Terraform-Reihe möchte ich kurz auf die (sehr simple) Installation von Terraform eingehen und euch die wichtigsten Befehle
+kurz erklären.
+
+
+
