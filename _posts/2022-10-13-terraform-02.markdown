@@ -418,4 +418,6 @@ Damit sollte die Instanz auch schon wieder verschwunden sein. Das ist zum Testen
 wieder abreisen können. Für Produktionsumgebungen würde ich allerdings empfehlen die API termination protection zu aktivieren (wenn der Cloud Provider dies unterstützt) um ein versehentliches löschen zu erschweren.
 
 
+Das soll es für diesen Artikel auch schon wieder gewesen sein. Bis demnächst!
 
+Mow
