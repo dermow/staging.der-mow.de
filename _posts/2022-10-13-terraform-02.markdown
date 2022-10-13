@@ -23,7 +23,9 @@ sudo apt update && sudo apt install terraform
 
 Das ganze für weitere Paket-Manger findet ihr hier:
 
-https://www.terraform.io/downloads
+[https://www.terraform.io/downloads](https://www.terraform.io/downloads)
+
+<!-- excerpt-end -->
 
 Nachdem das erledigt ist, könnt ihr testen ob terraform installiert wurde:
 
