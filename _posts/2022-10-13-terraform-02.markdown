@@ -11,7 +11,7 @@ im zweiten Teil der Terraform-Reihe möchte ich kurz auf die (sehr simple) Insta
 kurz erklären.
 
 
-#### Installation
+### Installation
 
 Die Installation ist sehr simpel und kann aus einem der Hashicorp-Repositories erfolgen. Beispielhaft für Debian/Ubuntu:
 
@@ -33,3 +33,13 @@ terraform --version
 Terraform v1.3.0
 on linux_amd64
 ```
+
+### Die wichtigsten Befehle
+
+##### terraform init
+Mit "init" initialisieren wir unser Terraform-Projekt. Dies müssen wir immer beim ersten mal tun, sowie immer, wenn wir änderungen an der Backend-Konfiguration vornehmen.
+
+```bash
+terraform init
+```
+
