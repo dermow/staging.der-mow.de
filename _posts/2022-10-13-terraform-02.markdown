@@ -13,7 +13,7 @@ kurz erklären.
 
 ### Installation
 
-Die Installation ist sehr simpel und kann aus einem der Hashicorp-Repositories erfolgen. Beispielhaft für Debian/Ubuntu:
+Die Installation ist sehr simpel und kann aus einem der  Hashicorp-Repositorys erfolgen. Beispielhaft für Debian/Ubuntu:
 
 ```bash
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -21,13 +21,13 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://
 sudo apt update && sudo apt install terraform
 ```
 
-Das ganze für weitere Paket-Manger findet ihr hier:
+Das Ganze für weitere Paket-Manger findet ihr hier:
 
 [https://www.terraform.io/downloads](https://www.terraform.io/downloads)
 
 <!-- excerpt-end -->
 
-Nachdem das erledigt ist, könnt ihr testen ob terraform installiert wurde:
+Nachdem das erledigt ist, könnt ihr testen, ob Terraform installiert wurde:
 
 ```bash
 terraform --version
@@ -79,7 +79,7 @@ resource "aws_instance" "my-instance" {
 ```
 
 #### terraform init
-Mit "init" initialisieren wir unser Terraform-Projekt. Dies müssen wir immer beim ersten mal tun, sowie immer, wenn wir änderungen an der Backend-Konfiguration vornehmen.
+Mit "init" initialisieren wir unser Terraform-Projekt. Dies müssen wir immer beim ersten Mal tun, sowie immer, wenn wir Änderungen an der Backend-Konfiguration vornehmen.
 
 ```bash
 terraform init
@@ -112,7 +112,7 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
 ### terraform validate
-Bevor wir loslegen, können wir unseren Terraform Code auf Syntaxfehler prüfen:
+Bevor wir loslegen, können wir unseren Terraform-Code auf Syntaxfehler prüfen:
 ```bash
 ❯ terraform validate
 Success! The configuration is valid.
@@ -266,12 +266,12 @@ To perform exactly these actions, run the following command to apply:
 
 ```
 
-Wie wir sehen möchte Terraform eine ressource anlegen (add), keine ändern (change), und auch keine löschen (destroy).
+Wie wir sehen möchte Terraform eine Ressource anlegen (add), keine ändern (change), und auch keine löschen (destroy).
 
 In der letzten Zeile sehen wir nun auch, wie wir den soeben angelegten Plan übernehmen können.
 
 ### terraform apply
-Mit "apply" übernehmen wir die Änderungen, die wir vorher mit Plan gepeichert haben:
+Mit "apply" übernehmen wir die Änderungen, die wir vorher mit Plan gespeichert haben:
 ```bash
 terraform apply "/tmp/my-plan-file"
 ```
@@ -285,7 +285,7 @@ aws_instance.my-instance: Creation complete after 12s [id=i-0fcef7f5c8d5e195d]
 Fertig! Die Instanz wurde erstellt und sollte nun in unserer AWS-Umgebung laufen :) Wir können "terraform plan" und apply auch ohne die Angabe eines Planfiles ausführen. Mit dem Plan file wird aber sichergestellt, dass exakt die Aktionen aus dem "terraform plan" auch ausgeführt werden.
 
 ### terraform show
-Mit terraform show können wir uns alle ressourcen und Datasources im State anzeigen lassen. 
+Mit terraform show können wir uns alle Ressourcen und Datasources im State anzeigen lassen. 
 
 ```bash
 terraform show
@@ -294,7 +294,7 @@ terraform show
 Den Output lasse ich hier der Übersicht halber mal raus :)
 
 ### Das State file
-Wenn man sich das Verzeichnis in dem unser Terraform-Code liegt genauer anschaut, sollte man nun auf ein File "**terraform.tfstate**" stoßen. Dieses enthält den aktuellen State im JSON Format.
+Wenn man sich das Verzeichnis, in dem unser Terraform-Code liegt, genauer anschaut, sollte man nun auf ein File "**terraform.tfstate**" stoßen. Dieses enthält den aktuellen State im JSON Format.
 
 ### terraform destroy
 Mit "destroy" können wir unsere Testinstanz wieder löschen:
@@ -403,7 +403,7 @@ Do you really want to destroy all resources?
   Enter a value: 
 
 ```
-Wenn wir das nun mit "yes" bestätigen, werden ALLE Ressourcen die im State enthalten sind gelöscht. In unserem Fall ist das nur die
+Wenn wir das nun mit "yes" bestätigen, werden ALLE Ressourcen, die im State enthalten sind gelöscht. In unserem Fall ist das nur die
 eine EC2-Instanz.
 
 ```
