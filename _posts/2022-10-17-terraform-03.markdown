@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Terraform #03 - HCL Basics"
-date:   2022-10-17 11:00:42 +0100
+date:   2022-10-17 11:00:42 +0200
 categories: Terraform
 ---
 
