@@ -6,3 +6,15 @@ categories: Terraform
 ---
 
 Heyho!
+
+in diesem Teil der Terraform-Reihe möchte ich auf einige Basics der HCL (Hashicorp Configuration Language) einigehen.
+
+#### Ressourcen
+
+#### Datasources
+
+#### Variablen
+
+#### Outputs
+
+#### Verweise
