@@ -9,12 +9,24 @@ Heyho!
 
 in diesem Teil der Terraform-Reihe möchte ich auf einige Basics der HCL (Hashicorp Configuration Language) einigehen.
 
-#### Ressourcen
+Die beiden Kernelemente der HCL sind "Arguments" und "Blocks". Argumente sind hierbei Felder, denen ein Wert zugewiesen werden kann.
 
-#### Datasources
+z.B:
 
-#### Variablen
+```yaml
+name = "hello world 1234"
+```
 
-#### Outputs
+Ein Block ist die logische Zusammenfassung von bestimmten Inhalten - so zum Beispiel der Beschreibung einer Cloud Instanz, die wir mit Terraform verwalten möchten.
 
-#### Verweise
+Block:
+```yaml
+resource "aws_instance" "my_instance" {
+  ami = "my-ubuntu-ami"
+
+  network_interface {
+    # ...
+  }
+}
+```
+Der Block startet hier mit "resource" und endet mit dem Schließen der geschweiften Klammer.
