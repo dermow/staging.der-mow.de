@@ -6,7 +6,7 @@ author:
 show_excerpts: true # set to true to show excerpts on the homepage
 excerpt_separator: <!-- excerpt-end -->
 google_analytics: false
-relative_permalinks: false
+
 
 disqus:
   shortname: der-mow
