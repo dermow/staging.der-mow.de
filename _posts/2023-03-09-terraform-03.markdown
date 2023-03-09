@@ -7,15 +7,15 @@ categories: Terraform
 
 Hey!
 
-in Teil drei der Terraform-Reihe möchte ich euch die Basics der Hashicorp eigenen Konfigurationssprache HCL vorstellen. HCL steht dabei ganz einfach für "Hashicorp Configuration Language".
+In Teil drei der Terraform-Reihe möchte ich euch die Basics der Hashicorp eigenen Konfigurationssprache HCL vorstellen. HCL steht dabei ganz einfach für “Hashicorp Configuration Language”.
 
 Eine detaillierte Beschreibung findet ihr in der Hashicorp Dokumentation:
+
 https://developer.hashicorp.com/terraform/language/syntax/configuration
 
 Ich möchte das ganze hier aber für euch zusammenfassen!
 
-
-Zunächst mal halten wir fest, dass die HCL einen deklarativen Ansatz verfolgt, wir schreiben also kein Script - sonderd definieren vielmehr unseren gewünschten Zielzustand.
+Zunächst mal halten wir fest, dass die HCL einen deklarativen Ansatz verfolgt, wir schreiben also kein Script - sondern definieren vielmehr unseren gewünschten Zielzustand.
 
 <!-- excerpt-end -->
 
@@ -30,8 +30,7 @@ Es gibt drei Begriffe, die uns bei der Nutzung von HCL immer wieder unterkommen 
 #### Blocks
 Blocks sind die logische Zusammenfassung von Konfigurationseinheiten. Das kann in Terraform zum Beispiel eine Ressource sein, oder auch eine Datasource.
 
-Jeder Block beginnt mit der Definition des Typs, und jeder Blocktyp definiert dabei wieder, wie viele weitere Argumente folgen müssen. Hier einige Beispiele, die das ganze 
-etwas veranschaulichen.
+Jeder Block beginnt mit der Definition des Typs, und jeder Blocktyp definiert dabei wieder, wie viele weitere Argumente folgen müssen. Hier einige Beispiele, die das gGanze etwas veranschaulichen.
 
 ```terraform
 resource "aws_instance" "my-instance" {
@@ -39,7 +38,7 @@ resource "aws_instance" "my-instance" {
   ...
 }
 ```
-Hier definieren wir einen Block des Typs "**resource**". Für diesen Typ ist definiert, dass noch ein weiteres Argument folgen muss, nämlich der Ressourcen-identifier (my-instance).
+Hier definieren wir einen Block des Typs "**resource**". Für diesen Typ ist definiert, dass noch ein weiteres Argument folgen muss, nämlich der Ressourcen-Identifier (my-instance).
 
 ```terraform
 data "aws_instance" "my-existing-instance" {
@@ -47,7 +46,7 @@ data "aws_instance" "my-existing-instance" {
   ...
 }
 ```
-Hier definieren wir einen Block des Typs "**data**". Für diesen Typ ist ebenfalls definiert, dass noch ein weiteres Argument folgen muss, nämlich der Data-identifier (my-existing-instance).
+Hier definieren wir einen Block des Typs "**data**". Für diesen Typ ist ebenfalls definiert, dass noch ein weiteres Argument folgen muss, nämlich der Data-Identifier (my-existing-instance).
 
 
 ```terraform
@@ -62,7 +61,7 @@ Für den Typ "**provider**" ist nur ein weiteres Feld notwendig, nämlich der Pr
 
 #### Arguments
 
-Ein Argument weißt einem Namen bzw. einem Feld einen Wert zu. Dieser Name ist dabei wiederum ein Identifier (zu denen wir gleich kommen). Schauen wir uns nochmal unsere Beispiel-Ressource an:
+Ein Argument weist einem Namen bzw. einem Feld einen Wert zu. Dieser Name ist dabei wiederum ein Identifier (zu denen wir gleich kommen). Schauen wir uns nochmal unsere Beispiel-Ressource an:
 
 ```terraform
 resource "aws_instance" "my-instance" {
@@ -91,7 +90,7 @@ Für Identifier gelten gewisse Regeln. Sie dürfen zum Beispiel nur folgende Zei
 * Unterstriche (_)
 * Bindestriche (-)
 
-Natürlich gibt es hier eine vollständige Referenz in der Dokumentation. Hashicorp nutzt hier die **Unicode Identifier Syntax** welche hier nachzulesen ist:
+Natürlich gibt es hier eine vollständige Referenz in der Dokumentation. Hashicorp nutzt hier die **Unicode Identifier Syntax**, welche hier nachzulesen ist:
 
 http://unicode.org/reports/tr31/
 
@@ -128,7 +127,7 @@ resource "aws_instance" "my-instance" {
 ```
 
 
-### Ende...
+### Ende ...
 
 Das wären also die absoluten HCL Basics, diese gelten im Prinzip für alle Anwendungsfälle in Terraform. Der Vollständigkeit halber sei noch gesagt, dass wir das alles auch im JSON Format definieren könnten, allerdings wird das von Natur aus enorm unübersichtlich. Deshalb ist die HCL-Variante hier wesentlich besser.
 
