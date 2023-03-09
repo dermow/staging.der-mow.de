@@ -1,0 +1,62 @@
+---
+layout: post
+title:  "Terraform #03 - HCL Basics"
+date:   2023-03-09 10:00:42 +0100
+categories: Terraform
+---
+
+Hey!
+
+in Teil drei der Terraform-Reihe möchte ich euch die Basics der Hashicorp eigenen Konfigurationssprache HCL vorstellen. HCL steht dabei ganz einfach für "Hashicorp Configuration Language".
+
+Eine detaillierte Beschreibung findet ihr in der Hashicorp Dokumentation:
+https://developer.hashicorp.com/terraform/language/syntax/configuration
+
+Ich möchte das ganze hier aber für euch zusammenfassen!
+
+
+Zunächst mal halten wir fest, dass die HCL einen deklarativen Ansatz verfolgt, wir schreiben also kein Script - sonderd definieren vielmehr unseren gewünschten Zielzustand.
+
+<!-- excerpt-end -->
+
+### Aufbau
+
+Es gibt drei Begriffe, die uns bei der Nutzung von HCL immer wieder unterkommen werden. Das sind:
+
+* Blocks
+* Arguments
+* Identifier
+
+#### Blocks
+Blocks sind die logische Zusammenfassung von Konfigurationseinheiten. Das kann in Terraform zum Beispiel eine Ressource sein, oder auch eine Datasource.
+
+Jeder Block beginnt mit der Definition des Typs, und jeder Blocktyp definiert dabei wieder, wie viele weitere Argumente folgen müssen. Hier einige Beispiele, die das ganze 
+etwas veranschaulichen.
+
+```terraform
+resource "aws_instance" "my-instance" {
+  name = "my-test-instance"
+  ...
+}
+```
+Hier definieren wir einen Block des Typs "**resource**". Für diesen Typ ist definiert, dass noch ein weiteres Argument folgen muss, nämlich der Ressourcen-identifier (my-instance).
+
+```terraform
+data "aws_instance" "my-existing-instance" {
+  name = "my-test-instance"
+  ...
+}
+```
+Hier definieren wir einen Block des Typs "**data**". Für diesen Typ ist ebenfalls definiert, dass noch ein weiteres Argument folgen muss, nämlich der Data-identifier (my-existing-instance).
+
+
+```terraform
+provider "aws" {
+  region = "eu-central-1"
+  access_key = "my-access-key"
+  secret_key = "my-secret-key"
+}
+```
+
+Für den Typ "**provider**" ist nur ein weiteres Feld notwendig, nämlich der Provider-Typ (aws).
+
