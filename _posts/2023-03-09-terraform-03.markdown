@@ -128,5 +128,26 @@ resource "aws_instance" "my-instance" {
 ```
 
 
+### Ende...
+
+Das wären also die absoluten HCL Basics, diese gelten im Prinzip für alle Anwendungsfälle in Terraform. Der Vollständigkeit halber sei noch gesagt, dass wir das alles auch im JSON Format definieren könnten, allerdings wird das von Natur aus enorm unübersichtlich. Deshalb ist die HCL-Variante hier wesentlich besser.
+
+Im nächsten Teil möchte ich dann auf drei weitere wichtige Mechanismen und deren Einsatz eingehen:
+
+* Variablen
+* Inputs
+* Outputs
+
+
+
+Bis zum nächsten Mal! :)
+
+Mow
+
+
+
+
+
+
 
 
