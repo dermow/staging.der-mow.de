@@ -100,7 +100,7 @@ instance_type_appserver = "t3.medium"
 instance_type_database = "t3.large"
 ```
 
-### Über ein benutzerdefiniertes Confiffile
+### Über ein benutzerdefiniertes Configfile
 Wir können die Werte auch in einem eigenen Configfile definieren. In diesem Fall müssen wir terraform beim Aufruf aber den Pfad mitgeben:
 
 **my-custom.tfvars**
