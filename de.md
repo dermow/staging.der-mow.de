@@ -1,6 +1,5 @@
 ---
-layout: default
 title: de
 permalink: /de/
-header: true
+layout: home-de
 ---
