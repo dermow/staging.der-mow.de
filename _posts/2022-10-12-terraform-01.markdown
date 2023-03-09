@@ -1,0 +1,105 @@
+---
+layout: post
+title:  "Terraform #01 - Übersicht"
+date:   2022-10-12 10:00:42 +0100
+categories: Terraform
+---
+
+Moin,
+
+nach langer Pause möchte ich nun mal wieder eine kleine Artikel-Reihe starten, die sich um Terraform drehen soll. Zunächst mal kurz: Was ist Terraform eigentlich?
+
+Mithilfe von Terraform können wir (Cloud)Infrastrukturen mit Code (Infrastructure as Code) beschreiben und diese erzeugen und verwalten. Terraform setzt dabei auf seine eigene Beschreibungssprache HCL (Hashicorp Configuration Language). Grob zusammengefasst beschreiben wir unsere Ziel-Umgebung mit HCL und Terraform nutzt dann die verschiedensten Cloud-APIs, um die Ressourcen zu erstellen bzw. zu verwalten.
+
+Bevor wir in den nächsten Artikeln weiter darauf eingehen, möchte ich kurz die wichtigsten Begrifflichkeiten erläutern.
+
+<!-- excerpt-end -->
+
+**State**: 
+Im Gegensatz zu z.B. Ansible, welches ohne vorheriges Wissen auf die Infrastruktur losgeht, "merkt" sich Terraform den aktuellen Zustand der selbst verwalteten Ressourcen in seinem State, der lokal auf der Festplatte, in einem S3-Bucket - oder auf vielen weiteren Providern gespeichert werden kann.
+
+**Backend**:
+Die Backend-Konfiguration bestimmt, wo Terraform seine State-Files ablegen soll.
+
+**Provider**:
+Ein Provider ist sozusagen ein "Plugin" mit dem Terraform in die Lage versetzt wird mit den verschiedenen Cloud APIs zu sprechen. Provider gibt es z.B. für AWS, Microsoft Azure, Google Cloud Platform - aber auch für klassische Umgebungen wie VMware. Eine Liste aller integrierter Provider findet sich hier:
+https://registry.terraform.io/browse/providers
+
+**Ressource**:
+Eine Ressource ist ein Objekt, welches von Terraform verwaltet - bzw. erstellt werden soll. 
+
+**Datasource**:
+Eine Datasource ist eine bestehende Ressource, außerhalb des aktuellen Terraform-State - auf die wir dynamisch zugreifen möchten. Dies ist zum Beispiel hilfreich, wenn wir Subnet-IDs in einer Cloud benötigen, die Subnets aber nicht selbst anlegen. 
+
+**Modul**:
+Ein Modul ist in Terraform eine zusammenhängende Einheit an HCL-Code. In einem Terraform-Projekt existiert immer das Root-Modul. Wir können aber auch wiederverwendbare Module wie z.B. "aws-webserver" oder ähnliches erstellen und diese in beliebig vielen weiteren Projekten parametrisiert nutzen.
+
+### Kurzes Beispiel
+Hier ein kurzes Beispiel, um das Ganze in der Praxis zu zeigen:
+
+```HCL
+// Provider Konfiguration
+provider "aws" {
+  region = "eu-central-1"
+  access_key = "my-access-key"
+  secret_key = "my-secret-key"
+}
+
+
+// Mit der Datasource finden wir ein existierendes AMI
+data "aws_ami" "ubuntu-ami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+// Ressource: EC2-Instanz
+resource "aws_instance" "my-instance" {
+  ami           = data.aws_ami.ubuntu-ami.id
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+```
+
+Somit haben wir ein kleines Terraform-Projekt angelegt. Um den Code umzusetzen, müssen wir (vorausgesetzt Terraform ist bereits installiert) noch folgende Befehle kennen:
+
+```bash
+# Provider installieren & state file anlegen
+terraform init
+```
+```bash
+# Testlauf durchführen 
+terraform plan
+```
+```bash
+# Änderungen übernehmen
+terraform apply
+```
+
+### Funktionsweise
+
+Wie leitet Terraform nun seine Aktionen ab? Im Grunde vergleicht Terraform immer den Code (Sollzustand) mit dem State (Ist-Zustand) und leitet aus der Differenz seine Aktionen ab. Existiert also eine Ressource im Code, aber nicht im State, so wird diese angelegt. Existiert dagegen eine Ressource im State aber nicht mehr im Code, so wird dieses gelöscht. Wichtig zu wissen ist, dass Terraform nur mit Ressourcen arbeitet, die auch mit Terraform angelegt wurden, es werden also keine Instanzen gelöscht, die Terraform nicht kennt.
+
+**Übersichtsgrafik:**
+
+![Terraform drawio](https://user-images.githubusercontent.com/68634232/195308463-d3d56d76-98be-4504-a013-6010f947a3b8.png)
+
+
+Mehr zur Installation und Verwendung von Terraform dann im nächsten Teil :-)
+
+Viele Grüße und bis dann
+
+Mow
