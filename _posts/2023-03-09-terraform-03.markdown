@@ -60,3 +60,73 @@ provider "aws" {
 
 Für den Typ "**provider**" ist nur ein weiteres Feld notwendig, nämlich der Provider-Typ (aws).
 
+#### Arguments
+
+Ein Argument weißt einem Namen bzw. einem Feld einen Wert zu. Dieser Name ist dabei wiederum ein Identifier (zu denen wir gleich kommen). Schauen wir uns nochmal unsere Beispiel-Ressource an:
+
+```terraform
+resource "aws_instance" "my-instance" {
+  name = "my-test-instance"
+  instance_type = "t3.micro"
+}
+```
+
+Wir haben hier wieder die Definition eines Ressourcen-Blocks. Innerhalb der Blockdefinition befinden sich nun die Arguments. In diesem Falle ist "name" der **Argument-Name**, und "my-test-instance" der
+**Argument-Wert**. Argumentdefinitionen folgen also immer dem Schema: 
+
+**argument_name** = **argument_value**
+
+#### Identifier
+
+Mit Identifiern sind in der HCL sehr viele Elemente gemeint. Das können z.B sein:
+
+* Variablen-Namen
+* Argument-Namen
+* Ressourcen-Namen
+
+Für Identifier gelten gewisse Regeln. Sie dürfen zum Beispiel nur folgende Zeichen enthalten:
+
+* Buchstaben
+* Zahlen
+* Unterstriche (_)
+* Bindestriche (-)
+
+Natürlich gibt es hier eine vollständige Referenz in der Dokumentation. Hashicorp nutzt hier die **Unicode Identifier Syntax** welche hier nachzulesen ist:
+
+http://unicode.org/reports/tr31/
+
+
+### Kommentare
+Natürlich können wir in unserem HCL Code auch Kommentare nutzen:
+
+
+#### Single Line
+```terraform
+# Dies ist ein einzeiliges Kommentar!
+resource "aws_instance" "my-instance" {
+  name = "my-test-instance"
+  instance_type = "t3.micro"
+}
+
+// Dies ist ebenfalls ein einzeiliges Kommentar!
+resource "aws_instance" "my-instance" {
+  name = "my-test-instance"
+  instance_type = "t3.micro"
+}
+```
+
+#### Multiline
+```terraform
+/* Dieser Kommentar erstreckt sich über....
+   mehrere Zeilen... und zwar...
+   einfach weil ich es kann... */
+resource "aws_instance" "my-instance" {
+  name = "my-test-instance"
+  instance_type = "t3.micro"
+}
+
+```
+
+
+
+
