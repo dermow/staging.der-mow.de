@@ -1,0 +1,228 @@
+---
+layout: post
+title:  "Terraform #04 - Input Variablen"
+date:   2023-03-09 10:00:42 +0100
+categories: Terraform
+---
+
+Moinsn!
+
+in diesem Beitrag möchten wir uns mit Input Variablen beschäftigen. Diese Erlauben uns bestimmte Werte & Aspekte in Terraform über die CLI, Umgebungsvariablen, Konfiguraitonsdateien oder Module-Inputs (kommen wir in einem späteren Teil dazu) variabel zu gestalten.
+
+Lasst uns wieder mit einer einfachen AWS Ressource beginnen:
+
+```terraform
+resource "aws_instance" "appserver" {
+  name = "my-appserver-1"
+  instance_type = "t3.micro"
+  tags = {
+    owner = "me",
+    contact = "me@myself.com"
+  }
+}
+
+resource "aws_instance" "database" {
+  name = "my-database-1"
+  instance_type = "t3.micro"
+  tags = {
+    owner = "me",
+    contact = "me@myself.com"
+  }
+}
+```
+
+<!-- excerpt-end -->
+
+Möchten wir diesen Code nun zum Beispeil widerverwendbar gestalten, oder sich wiederholende Werte nur an einer Stelle definieren, können wir Variablen nutzen. 
+
+Variablen müssen wir ebenfalls als Block definieren. Nehmen wir an  wir möchten jeweils die Instanztypen für "appserver" und "database" über Variablen steuern können, und auc direkt mit Standardwerten belegen:
+
+Der Übersicht halber, legen wir uns ein dediziertes File in unserem Projekt an, z.B "**variables.tf**"
+```terraform
+variable "instance_type_appserver" {
+  type = string
+  description = "instance type to use for app server"
+  default = "t3.micro"
+}
+
+variable "instance_type_database" {
+  type = string
+  description = "instance type to use for db server"
+  default = "t3.micro"
+}
+```
+
+Um nochmal die HCL Basics aus dem vorhergehenden Teil aufzugreifen, haben wir zwei Blöcke des **Typs** "variable" definiert, einmal mit dem **Identifier** "instance_type_appserver" und einmal mit "instance_type_database". Innerhalb der Blockdefinition geben wir drei **Argumente** an:
+
+* **type** : Der Datentype der Variable, in diesem Fall eine Zeichenkette (string)
+* **description**: Optional, aber empfohlen: Eine Beschreibung der Variable
+* **default** Ein Standardwert, den die Variable annimmt, wenn kein Werte über einen der möglichen Wege eingegeben wurde (CLI, Umgebungsvariable...). Lassen wir den Default weg,  und definieren auch auf anderem Wege keine Zuweisung, wid uns Terraform beim "apply" interaktiv nach dem Wert fragen.
+
+In unserer Ressource können wir diese nun so einsetzen:
+
+```terraform
+resource "aws_instance" "appserver" {
+  name = "my-appserver-1"
+  instance_type = var.instance_type_appserver
+  tags = {
+    owner = "me",
+    contact = "me@myself.com"
+  }
+}
+
+resource "aws_instance" "database" {
+  name = "my-database-1"
+  instance_type = var.instance_type_database
+  tags = {
+    owner = "me",
+    contact = "me@myself.com"
+  }
+}
+```
+
+Den code könnten wir jetzt so übernehmen, oder die Variablen noch beim Aufruf setzen. Wie gesagt gibt es dafür mehrere Wege:
+
+### Über Umgebungsvariablen
+Wir können alle Variablen auch als Umgebungsvariable setzen. Diese beginnen immer mit "**TF_VAR_**". Für dieses Beispiel könnte das so aussehen:
+
+```bash
+export TF_VAR_instance_type_appserver="t3.medium"
+export TF_VAR_instance_type_database="t3.large"
+
+terraform apply
+```
+
+### Über ein Standard Configfile (terraform.tfvars)
+Wir können die Werte auch in einem Configfile im Projektverzeichnis speichern. Wenn wir die Datei "terraform.tfvars" nennen, wird diese per Default gezogen:
+
+```
+instance_type_appserver = "t3.medium"
+instance_type_database = "t3.large"
+```
+
+### Über ein benutzerdefiniertes Confiffile
+Wir können die Werte auch in einem eigenen Configfile definieren. In diesem Fall müssen wir terraform beim Aufruf aber den Pfad mitgeben:
+
+**my-custom.tfvars**
+```
+instance_type_appserver = "t3.medium"
+instance_type_database = "t3.large"
+```
+```bash
+terraform apply --varfile my-custom.tfvars 
+```
+
+Dies könnte z.B später mal nützlich werden, wenn wir den gleichen Terraformcode in unterschiedlichen Umgebungen nutzen (Dev, Test, Prod).
+
+### Über die CLI
+Wir können die Variablen auch beim Terraform-Aufruf einzeln setzen:
+
+```bash
+terraform apply -var="instance_type_appserver=t3.medium" -var="instance_type_database=t3.large"
+```
+
+### Reihenfolge
+Natürlich können wir auch gleichzeitig verschiedene der genannten Wege nutzen. Terraform priorisiert hier nach der folgenden Reihenfolge (Prio hoch nach niedrig von oben nach unten):
+
+* Umgebungsvariablen
+* terraform.tfvars
+* Kommandozeilen-Parameter (-var, sowie -var-file)
+
+## Variablentypen
+Den Variablentyp "string" haben wir nun bereits kennengelernt. Allerings gibt es hier noch ein paar weitere:
+
+| Typ  | Beschreibung  | Beispiel |
+|---|---|---|
+| string  | Zeichenkette, Text   | "Hello World"
+| number  | Ein numerischer Wert. Kann Ganzzahlen und Gleitkommazahlen darstellen   | ```12``` oder ```8.5```
+| bool  | True oder False  | True, False |
+| list  | Eine Liste mit Werten  | [ "Wert 1", "Wert 2" ] |
+| map  | Key- Value Paare, z.B Instanz-Tags  | { name = "my name", type = "my type"} |
+| null | Sehr spezieller null wert, steht für Abwesenheit einer Ressource oder das Überspringen eines Wertes | null |
+
+Eine sehr detaillierte Beschreibung findet sich wie immer in der Terraform-Dokumentation:
+
+https://developer.hashicorp.com/terraform/language/expressions/types
+
+
+
+## String-Interpolation
+
+Im obrigen Beispiel haben wir jeweils den gesamten Argument-Wert von "instance_type" mit einer Variable ersetzt. So weit, so gut. Manchmal möchten wir Variablen aber auch "mitten im Wort" einsetzen. Angenommen wir möchten für eine unserer AWS Intanzen ein festes Namens-Prefix definieren:
+
+**variables.tf**
+```terraform
+...
+
+variable "prefix" {
+  type = "string"
+  description = "prefix for all instances"
+  default = "mycompany"
+}
+
+...
+```
+
+**instances.tf**
+```terraform
+resource "aws_instance" "appserver" {
+  name = "${var.prefix}-appserver-1"
+  instance_type = var.instance_type_appserver
+  tags = {
+    owner = "me",
+    contact = "me@myself.com"
+  }
+}
+
+resource "aws_instance" "database" {
+  name = "${var.prefix}-appserver-1"
+  instance_type = var.instance_type_database
+  tags = {
+    owner = "me",
+    contact = "me@myself.com"
+  }
+}
+```
+
+Wir müssen unsere Variable also mit "**${ }**" markieren um sie innerhalb eines Strings nutzen zu können. Diese Variante werden wir später noch sehr häufig brauchen.
+
+
+## Abschließendes Beispiel mit dem Variablen-Typ "map"
+Um auch noch einen anderen Variablen-Typ zu zeigen, definieren wir nun noch die Tags einheitlich als Variable. Wir erweitern dazu unser "variables.tf" folgendermaßen:
+
+```terraform
+...
+
+variable "my_tags" {
+  type = map
+  description = "tags to add to each ressource"
+  default = {
+    owner = "me",
+    contact = "me@myself.com"
+  }
+}
+
+...
+```
+
+Und schließlich passen wir noch die Intanzdefinition an:
+```terraform
+resource "aws_instance" "appserver" {
+  name = "${var.prefix}-appserver-1"
+  instance_type = var.instance_type_appserver
+  tags = var.my_tags
+}
+
+resource "aws_instance" "database" {
+  name = "${var.prefix}-appserver-1"
+  instance_type = var.instance_type_database
+  tags = var.my_tags
+}
+```
+
+
+
+## Ende
+So, das wars dann auch schon wieder. Ich freu mich aufs nächte Mal :)
+
+mow
