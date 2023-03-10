@@ -2,8 +2,7 @@
 layout: post
 title:  "Änderung am Blog Design" 
 date:   2021-04-28 08:50:42 +0100
-categories: 
-  - Allgemein
+categories: Allgemein
 ---
 
 Moinsn! Ich hab gerade einige Änderungen am CSS für diesen Blog vorgenommen - sollte es bei euch zu Anzeigeproblemen, besonders in der Preview der Posts kommen, bitte einmal den Browser-Cache leeren.

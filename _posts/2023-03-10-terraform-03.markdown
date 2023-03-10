@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Terraform #03 - HCL Basics"
-date:   2023-03-09 10:00:42 +0100
+title:  "Terraform #03 - Hashicorp Configuration Language (HCL)"
+date:   2023-03-10 08:00:00 +0100
 categories: Terraform
 ---
 
@@ -11,7 +11,7 @@ In Teil drei der Terraform-Reihe möchte ich euch die Basics der Hashicorp eigen
 
 Eine detaillierte Beschreibung findet ihr in der Hashicorp Dokumentation:
 
-https://developer.hashicorp.com/terraform/language/syntax/configuration
+[https://developer.hashicorp.com/terraform/language/syntax/configuration]()
 
 Ich möchte das ganze hier aber für euch zusammenfassen!
 
@@ -92,7 +92,7 @@ Für Identifier gelten gewisse Regeln. Sie dürfen zum Beispiel nur folgende Zei
 
 Natürlich gibt es hier eine vollständige Referenz in der Dokumentation. Hashicorp nutzt hier die **Unicode Identifier Syntax**, welche hier nachzulesen ist:
 
-http://unicode.org/reports/tr31/
+[http://unicode.org/reports/tr31/]()
 
 
 ### Kommentare

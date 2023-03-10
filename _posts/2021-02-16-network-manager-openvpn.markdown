@@ -2,11 +2,7 @@
 layout: post
 title:  "Network Manager: Import per CLI"
 date:   2021-02-16 09:15:42 +0100
-categories: 
-  - HowTo
-  - Linux
-  - NetworkManager
-  - OpenVPN
+categories: Sonstiges
 ---
 
 Ich habe kürzlich mein Notebook neu installiert, da ich vom Default-Ubuntu 20.04 auf Ubuntu MATE in selbiger Version 

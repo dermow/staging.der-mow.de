@@ -2,7 +2,7 @@
 layout: post
 title:  "Hello World!"
 date:   2021-02-11 16:57:42 +0100
-categories: Allgemein
+categories: Sonstiges
 ---
 
 Hallo Welt! Hier ist sie nun, meine neue Website.
