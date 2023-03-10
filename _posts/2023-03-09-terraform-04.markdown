@@ -142,7 +142,7 @@ Den Variablentyp "string" haben wir nun bereits kennengelernt. Allerdings gibt e
 
 Eine sehr detaillierte Beschreibung findet sich wie immer in der Terraform-Dokumentation:
 
-https://developer.hashicorp.com/terraform/language/expressions/types
+[https://developer.hashicorp.com/terraform/language/expressions/types]()
 
 
 
